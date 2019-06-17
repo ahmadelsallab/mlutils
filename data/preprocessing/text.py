@@ -3,7 +3,7 @@ class TextFeatures:
     def __init__(self, texts):
         pass
 
-    def vectorize(self, text):
+    def extract(self, text):
         raise NotImplementedError("vectorize to be implemented according to the exact representation method")
 
     def _build_vocab(self, text):
@@ -29,7 +29,7 @@ class SequenceFeatures(TextFeatures):
     def __init__(self, texts):
         super().__init__(texts=texts)
 
-    def vectorize(self, text):
+    def extract(self, text):
         pass
 
 
@@ -37,7 +37,7 @@ class BoWFeatures(TextFeatures):
     def __init__(self, texts):
         super().__init__(texts=texts)
 
-    def vectorize(self, text):
+    def extract(self, text):
         pass
 
 
@@ -45,7 +45,7 @@ class CountFeatures(TextFeatures):
     def __init__(self, texts):
         super().__init__(texts=texts)
 
-    def vectorize(self, text):
+    def extract(self, text):
 
         pass
 
@@ -54,6 +54,6 @@ class TFIDFFeatures(TextFeatures):
     def __init__(self, texts):
         super().__init__(texts=texts)
 
-    def vectorize(self, text):
+    def extract(self, text):
         pass
 

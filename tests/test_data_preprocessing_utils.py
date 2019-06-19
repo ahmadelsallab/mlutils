@@ -1,6 +1,6 @@
 from unittest import TestCase
 
-import data.preprocessing.utils as utils
+import data.preprocessing.text.Utils as utils
 
 
 class Test_data_preprocessing_utils(TestCase):

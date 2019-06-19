@@ -4,9 +4,9 @@ class TextFeatures:
         pass
 
     def extract(self, text):
-        raise NotImplementedError("vectorize to be implemented according to the exact representation method")
+        raise NotImplementedError("extract to be implemented according to the exact representation method")
 
-    def _build_vocab(self, text):
+    def _build_vocab(self, texts):
         pass
 
     def _fit_tokenizer(self, text):

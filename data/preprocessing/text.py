@@ -216,9 +216,10 @@ class Utils:
               embedding_matrix[i] = embedding_vector
         return embedding_matrix
 
+'''
 class Normalizer:
     def __init__(self, method='nltk'):
-
+'''
 
 class Tokenizer:
     def __init__(self, texts=None, method='keras', vocab_size=None, oov_token=None):

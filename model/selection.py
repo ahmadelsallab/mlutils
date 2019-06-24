@@ -67,6 +67,9 @@ class AggregateModels(BaseEstimator, RegressorMixin, TransformerMixin):
         self.get_valid_weights(r, len(self.models_))
         # print(self.valid_ratios)
         best_rmse = 10000
+
+        best_ratios = self.valid_ratios[0]
+
         for ratios in self.valid_ratios:
             # self.ratios = np.array(ratios)
             self.ratios = ratios

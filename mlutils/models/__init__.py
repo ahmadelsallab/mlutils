@@ -49,7 +49,7 @@ def category_embedding(cat_vars):
     concat_l = concatenate(emb_outs)
     # TODO: try average pooling, and and learnable (Dense) merge
 
-    # model
+    # models
     model = Model(input_l, concat_l)
 
     return model

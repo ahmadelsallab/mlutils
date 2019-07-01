@@ -17,7 +17,7 @@ from nltk.stem import WordNetLemmatizer
 
 
 # See https://medium.com/@datamonsters/text-preprocessing-in-python-steps-tools-and-examples-bf025f872908
-class Utils:
+class TextUtils:
 
     def __init__(self):
         """
@@ -100,18 +100,6 @@ class Utils:
     def replace_numbers(text):
         """Replace all interger occurrences in list of tokenized words with textual representation"""
         return re.sub(r'\d+', '', text)
-
-        '''
-        p = inflect.engine()
-        new_words = []
-        for word in words:
-            if word.isdigit():
-                new_word = p.number_to_words(word)
-                new_words.append(new_word)
-            else:
-                new_words.append(word)
-        return new_words
-        '''
 
     @staticmethod
     def remove_whitespaces(cls, text):
@@ -254,7 +242,7 @@ class Vocabulary:
     def build_vocab(self, texts, vocab_size=None, oov_token='_UNK_'):
 
         if self.library == 'string':
-            words = [word for text in texts for word in Utils.text2words(text, method=self.library)]
+            words = [word for text in texts for word in TextUtils.text2words(text, method=self.library)]
             word_counts = Counter(words)
 
             # Sort by most frequent. Not that .items() is a tuple, and counts is at index [1] of that tuple
@@ -295,7 +283,7 @@ class TextFeatures:
         self.library = method
         pre_vocab = None
 
-        texts = Utils.normalize_corpus(texts)
+        texts = TextUtils.normalize_corpus(texts)
         if method == 'keras':
             self.tokenizer = Tokenizer(texts, vocab_size, oov_token).tokenizer
             pre_vocab = self.tokenizer.word_index
@@ -308,7 +296,7 @@ class TextFeatures:
 
         self.vocab = Vocabulary(texts=texts, pre_vocab=pre_vocab, method=method, vocab_size=vocab_size)
 
-        self.maxlen = Utils.calc_max_len_from_text(texts)
+        self.maxlen = TextUtils.calc_max_len_from_text(texts)
 
     def text2features(self, texts, pad=True):
         raise NotImplementedError("extract to be implemented according to the exact representation method")
@@ -330,12 +318,12 @@ class SequenceFeatures(TextFeatures):
             features = self.tokenizer.texts_to_sequences(texts)
 
         elif self.library == 'string':
-            features = [[self.vocab.str2idx[word] for word in Utils.text2words(text)] for text in texts]
+            features = [[self.vocab.str2idx[word] for word in TextUtils.text2words(text)] for text in texts]
         else:
             raise Exception("No supported method set")
 
         if pad:
-            return Utils.pad(features, self.maxlen, self.library)
+            return TextUtils.pad(features, self.maxlen, self.library)
         else:
             return features
 

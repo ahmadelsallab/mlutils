@@ -226,6 +226,13 @@ class Tokenizer:
 
 
 class Vocabulary:
+    '''
+    Important note on Tokenizer:
+    If you fit a tokenizer wil small vocab using num_words, then take care that the word_index will still hold the full vocab.
+    Then if you vectorize the text, either use tokenizer.texts_to_sequences, which will take care of the passed num_words,
+    or if you develop ur own str2idx dict, then take care of the vocab not to use word_index as is, but limit it with the num_words,
+    keeping in mind that word_index is ordered by freqeuency. A better approach is to build your own vocab like below.
+    '''
     UNK_ID = 0  # 0 index is reserved for the UNK in both Keras Tokenizer and Embedding
 
     def __init__(self, texts=None, pre_vocab=None, method='string', vocab_size=None, oov_token=None, stop_words=None):
@@ -279,6 +286,11 @@ class TextFeatures:
     # 3. Filters non important tokens when building vocab
     # 4. Considers lower in vocab and extraction
     def __init__(self, texts, vocab_size=None, method='keras', oov_token=None, stop_words=None):
+        '''Important note on Tokenizer:
+        If you fit a tokenizer wil small vocab using num_words, then take care that the word_index will still hold the full vocab.
+        Then if you vectorize the text, either use tokenizer.texts_to_sequences, which will take care of the passed num_words,
+        or if you develop ur own str2idx dict, then take care of the vocab not to use word_index as is, but limit it with the num_words,
+        keeping in mind that word_index is ordered by freqeuency. A better approach is to build your own vocab'''
         # TODO: stop words not in keras. Use spacy.
         self.library = method
         pre_vocab = None

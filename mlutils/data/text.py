@@ -233,6 +233,24 @@ class Vocabulary:
     or if you develop ur own str2idx dict, then take care of the vocab not to use word_index as is, but limit it with the num_words,
     keeping in mind that word_index is ordered by freqeuency. A better approach is to build your own vocab like below.
     '''
+    '''
+    from keras.preprocessing.text import Tokenizer
+    # define 5 documents
+    docs = ['Well done!',
+    'Good work',
+    'Great effort',
+    'nice work',
+    'Excellent!']
+    # create the tokenizer
+    t = Tokenizer(num_words=2)
+    #t = Tokenizer()
+    # fit the tokenizer on the documents
+    # fit considers the num_words
+    t.fit_on_texts(docs)
+    t.texts_to_sequences(text_to_word_sequence(docs[0]))
+    # word_index do not consider the num_words 
+    print(t.word_index)# if this is used with a str2idx vectorizer, then we will have OOV scored.
+    '''
     UNK_ID = 0  # 0 index is reserved for the UNK in both Keras Tokenizer and Embedding
 
     def __init__(self, texts=None, pre_vocab=None, method='string', vocab_size=None, oov_token=None, stop_words=None):

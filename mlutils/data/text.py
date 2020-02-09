@@ -150,7 +150,7 @@ class TextUtils:
         text = cls.replace_numbers(text)
         words = cls.text2words(text)
         words = cls.remove_stopwords(words)
-        words = cls.stem_words(words)
+        #words = cls.stem_words(words) # Either stem of lemmatize
         words = cls.lemmatize_words(words)
         words = cls.lemmatize_verbs(words)
 
@@ -222,7 +222,7 @@ class Tokenizer:
 
     def fit(self, texts):
         if self.library == 'keras':
-            self.tokenizer.fit_on_texts()
+            self.tokenizer.fit_on_texts(texts)
 
 
 class Vocabulary:
@@ -380,4 +380,3 @@ class TFIDFFeatures(TextFeatures):
 
     def text2features(self, texts, pad=True):
         pass
-
